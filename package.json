@@ -1,0 +1,15 @@
+{
+  "name": "dental-clinic",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
+    "backend": "node backend/server.js",
+    "start": "concurrently \"npm run backend\" \"npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

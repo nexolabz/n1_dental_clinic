@@ -77,6 +77,15 @@ export default function RealResults() {
 
   return (
     <div className="slider-layout-wrapper">
+      {/* Slider Hint */}
+      <div className="slider-hint">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="slider-hint-icon">
+          <path d="M7 16L3 12L7 8M17 8L21 12L17 16" />
+          <path d="M3 12H21" />
+        </svg>
+        <span>Move the Slide</span>
+      </div>
+
       {/* Slider Frame */}
       <div 
         ref={containerRef}

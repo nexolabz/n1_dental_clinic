@@ -49,25 +49,23 @@
   --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text-main: #f1f5f9;
-    --text-muted: #94a3b8;
-    --text-light: #64748b;
-    
-    --bg-main: #0b1313;
-    --bg-soft: #0e1a1a;
-    --bg-card: #122121;
-    
-    --border-color: #1b2f2f;
-    --border-light: #162828;
-    
-    --primary-light: #122a2a;
-    
-    --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
-    --shadow-hover: 0 24px 48px rgba(0, 0, 0, 0.5);
-  }
+:root.dark-theme {
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  
+  --bg-main: #0b1313;
+  --bg-soft: #0e1a1a;
+  --bg-card: #122121;
+  
+  --border-color: #1b2f2f;
+  --border-light: #162828;
+  
+  --primary-light: #122a2a;
+  
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 24px 48px rgba(0, 0, 0, 0.5);
 }
 
 /* Base Styles */
@@ -79,6 +77,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -88,6 +87,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {

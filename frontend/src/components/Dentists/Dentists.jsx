@@ -38,7 +38,18 @@ export default function Dentists() {
 
         <div className="dentists-grid">
           {dentistTeam.map((dentist, idx) => (
-            <div key={idx} className="dentist-card doctor-apron-card">
+            <div 
+              key={idx} 
+              className="dentist-card doctor-apron-card"
+              style={{ 
+                '--scrub-color': dentist.scrubColor,
+                '--scrub-color-light': dentist.scrubColor === 'var(--primary)' 
+                  ? 'rgba(9, 133, 133, 0.25)' 
+                  : dentist.scrubColor === 'var(--secondary)' 
+                    ? 'rgba(212, 163, 89, 0.25)' 
+                    : 'rgba(242, 114, 89, 0.25)'
+              }}
+            >
               {/* Short Sleeves at the shoulders */}
               <div className="apron-sleeve sleeve-left"></div>
               <div className="apron-sleeve sleeve-right"></div>

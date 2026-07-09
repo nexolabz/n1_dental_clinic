@@ -1,0 +1,81 @@
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 8px 25px rgba(9, 133, 133, 0.25);
+  border-color: var(--primary);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.icon-container {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.icon-container.dark {
+  transform: rotate(360deg);
+}
+
+.icon-container.light {
+  transform: rotate(0deg);
+}
+
+.sun-icon, .moon-icon {
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.icon-container.light .sun-icon {
+  opacity: 1;
+  transform: scale(1);
+  color: #eab308; /* golden sun */
+}
+
+.icon-container.light .moon-icon {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.icon-container.dark .sun-icon {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.icon-container.dark .moon-icon {
+  opacity: 1;
+  transform: scale(1);
+  color: var(--primary); /* teal moon */
+}
+
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+  }
+}

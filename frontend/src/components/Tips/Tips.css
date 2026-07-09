@@ -21,7 +21,7 @@
 
 /* Interactive Card Styling */
 .tip-interactive-card {
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -42,7 +42,7 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background-color: #f1f5f9;
+  background-color: var(--bg-soft);
 }
 
 .tip-img {

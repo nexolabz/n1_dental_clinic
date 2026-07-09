@@ -8,6 +8,7 @@ import Tips from './components/Tips/Tips';
 import AppointmentForm from './components/AppointmentForm/AppointmentForm';
 import ContactUs from './components/ContactUs/ContactUs';
 import Footer from './components/Footer/Footer';
+import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 
 export default function App() {
   useEffect(() => {
@@ -46,6 +47,7 @@ export default function App() {
         <ContactUs />
       </main>
       <Footer />
+      <ThemeToggle />
     </div>
   );
 }

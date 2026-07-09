@@ -8,18 +8,6 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-top container">
         
-        {/* Brand Column */}
-        <div className="footer-col brand-col">
-          <a href="#home" className="logo">
-            <img src={`${import.meta.env.BASE_URL || '/'}icon.png`} alt='icon' className="logo-icon"/>
-            <span className="logo-text">Nova<span className="logo-subtext">Dental</span></span>
-          </a>
-          <p className="footer-about">
-            Experience advanced clinical wellness in a relaxed, comfortable environment. We offer comprehensive family, implant, and aesthetic dentistry.
-          </p>
-          <span className="footer-badge">★ ADA Accredited Practice</span>
-        </div>
-
         {/* Quick Links Column */}
         <div className="footer-col">
           <h4 className="footer-col-title">Quick Links</h4>
@@ -32,6 +20,40 @@ export default function Footer() {
             <li><a href="#appointment">Appointment</a></li>
             <li><a href="#contact">Contact Us</a></li>
           </ul>
+        </div>
+
+        {/* Address / Contact Column */}
+        <div className="footer-col">
+          <h4 className="footer-col-title">Address</h4>
+          <ul className="contact-details-list">
+            <li>
+              <strong>Clinic Location</strong>
+              <p>750 Medical Plaza, Suite 210, San Francisco, CA 94109</p>
+            </li>
+            <li>
+              <strong>Get in Touch</strong>
+              <p>
+                Phone: <a href="tel:+14155550190" className="contact-link">(415) 555-0190</a><br />
+                Email: <a href="mailto:care@novadental.com" className="contact-link">care@novadental.com</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        {/* Map Column */}
+        <div className="footer-col map-col">
+          <h4 className="footer-col-title">Our Location</h4>
+          <div className="footer-map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.972986422896!2d-122.4225026846819!3d37.78949827975691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858097f4cf9ab7%3A0xe9633e680a6b7d15!2s750%20Van%20Ness%20Ave%2C%20San%20Francisco%2C%20CA%2094102!5e0!3m2!1sen!2sus!4v1625000000000!5m2!1sen!2sus"
+              width="100%" 
+              height="160" 
+              style={{ border: 0, borderRadius: '12px' }} 
+              allowFullScreen="" 
+              loading="lazy"
+              title="NovaDental Clinic Map"
+            ></iframe>
+          </div>
         </div>
 
       </div>

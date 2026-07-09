@@ -116,3 +116,12 @@
 .service-learn-more:hover .arrow-icon {
   transform: translateX(4px);
 }
+
+@media (max-width: 480px) {
+  .service-card {
+    padding: 24px;
+  }
+  .service-icon {
+    margin-bottom: 20px;
+  }
+}

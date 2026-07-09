@@ -40,14 +40,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all var(--transition-normal);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden; /* Clips the sleeves and curved hem at card corners */
+  animation: cardEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 
+.doctor-apron-card:nth-child(1) { animation-delay: 0.1s; }
+.doctor-apron-card:nth-child(2) { animation-delay: 0.25s; }
+.doctor-apron-card:nth-child(3) { animation-delay: 0.4s; }
+
 .doctor-apron-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--primary) !important;
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.08), 0 0 25px var(--scrub-color-light);
+  border-color: var(--scrub-color) !important;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* Short Sleeves at the shoulders */
@@ -86,6 +102,13 @@
   z-index: 10;
   background-color: var(--bg-soft);
   flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.doctor-apron-card:hover .apron-head-container {
+  border-color: var(--scrub-color);
+  box-shadow: 0 0 15px var(--scrub-color);
+  transform: scale(1.02) translateY(-2px);
 }
 
 .apron-doctor-photo {
@@ -122,10 +145,8 @@
   box-shadow: var(--shadow-sm);
 }
 
-@media (prefers-color-scheme: dark) {
-  .dentist-exp-badge {
-    background-color: rgba(18, 33, 33, 0.95);
-  }
+:root.dark-theme .dentist-exp-badge {
+  background-color: rgba(18, 33, 33, 0.95);
 }
 
 /* Pointed Shirt Collar Wings */
@@ -149,6 +170,12 @@
   border: 1.5px solid #cbd5e1;
   border-top: none;
   clip-path: polygon(0 0, 100% 0, 75% 100%, 0 45%);
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-origin: top left;
+}
+
+.doctor-apron-card:hover .collar-left {
+  transform: rotate(-5deg) translate(-2px, -1px);
 }
 
 .collar-right {
@@ -161,6 +188,12 @@
   border: 1.5px solid #cbd5e1;
   border-top: none;
   clip-path: polygon(0 0, 100% 0, 100% 45%, 25% 100%);
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-origin: top right;
+}
+
+.doctor-apron-card:hover .collar-right {
+  transform: rotate(5deg) translate(2px, -1px);
 }
 
 .collar-top-button {
@@ -274,6 +307,15 @@
   height: 18px;
   border-radius: 2px 2px 0 0;
   top: -8px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.doctor-apron-card:hover .pen-gold {
+  transform: translateY(-7px) rotate(-2deg);
+}
+
+.doctor-apron-card:hover .pen-silver {
+  transform: translateY(-5px) rotate(2deg);
 }
 
 .pen-gold {
@@ -305,6 +347,13 @@
   justify-content: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   z-index: 2;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.doctor-apron-card:hover .apron-nametag {
+  transform: rotate(-4deg) translateY(-2.5px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--scrub-color);
 }
 
 .tag-brand {
@@ -364,6 +413,14 @@
   text-align: center;
   flex-grow: 1;
   width: 100%;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.doctor-apron-card:hover .dentist-info {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-color: rgba(226, 232, 240, 0.9);
 }
 
 .dentist-name {
@@ -381,6 +438,12 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 14px;
+  transition: all 0.3s ease;
+}
+
+.doctor-apron-card:hover .dentist-role {
+  color: var(--scrub-color);
+  letter-spacing: 0.8px;
 }
 
 .dentist-bio {
@@ -403,4 +466,73 @@
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--secondary-dark);
+}
+
+/* Dark Theme Apron Card Overrides */
+:root.dark-theme .doctor-apron-card {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+:root.dark-theme .doctor-apron-card:hover {
+  border-color: var(--scrub-color) !important;
+}
+
+:root.dark-theme .apron-sleeve,
+:root.dark-theme .collar-left,
+:root.dark-theme .collar-right,
+:root.dark-theme .apron-placket,
+:root.dark-theme .apron-pocket,
+:root.dark-theme .pocket-rim,
+:root.dark-theme .apron-nametag {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+:root.dark-theme .sleeve-left {
+  border-left-color: var(--border-color) !important;
+}
+
+:root.dark-theme .sleeve-right {
+  border-right-color: var(--border-color) !important;
+}
+
+:root.dark-theme .apron-head-container {
+  border-color: var(--bg-card) !important;
+}
+
+:root.dark-theme .collar-top-button,
+:root.dark-theme .apron-button {
+  background-color: var(--bg-soft) !important;
+  border-color: var(--text-light) !important;
+}
+
+:root.dark-theme .apron-placket {
+  border-left-color: var(--border-color) !important;
+  border-right-color: var(--border-color) !important;
+}
+
+:root.dark-theme .tag-name {
+  color: var(--text-main) !important;
+}
+
+:root.dark-theme .tag-status {
+  background-color: rgba(22, 163, 74, 0.15) !important;
+  color: #4ade80 !important;
+  border-color: rgba(74, 222, 128, 0.2) !important;
+}
+
+:root.dark-theme .apron-bottom-hem {
+  border-top-color: var(--border-color) !important;
+  background-color: var(--bg-soft) !important;
+}
+
+:root.dark-theme .dentist-info {
+  background-color: rgba(14, 26, 26, 0.85) !important; /* Dark translucent overlay sheet */
+  border-color: rgba(27, 47, 47, 0.6) !important;
+}
+
+:root.dark-theme .doctor-apron-card:hover .dentist-info {
+  background-color: rgba(14, 26, 26, 0.95) !important;
+  border-color: rgba(27, 47, 47, 0.9) !important;
 }

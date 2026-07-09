@@ -170,39 +170,11 @@ img {
 .section-title {
   font-size: 2.5rem;
   margin-bottom: 16px;
-  position: relative;
-  display: inline-block;
-  padding: 6px 24px 20px;
-  z-index: 1;
-}
-
-.section-title::before {
-  content: "";
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  min-width: 250px;
-  max-width: 440px;
-  height: 58px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' fill='none'%3E%3Cpath d='M10 35C40 25 80 40 120 30C160 20 200 45 240 35C260 30 280 25 290 28C290 28 275 42 250 45C210 50 170 30 130 38C90 46 50 35 10 35Z' fill='url(%23pasteGrad)' opacity='0.85'/%3E%3Cpath d='M20 33C50 25 90 38 130 28C170 18 200 38 240 33C255 31 275 24 282 25C282 25 268 36 245 38C210 41 180 28 140 33C100 38 60 33 20 33Z' fill='url(%23whiteGrad)' opacity='0.60'/%3E%3Cpath d='M30 30C60 22 100 32 140 24C170 18 190 28 220 26' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' opacity='0.60'/%3E%3Cdefs%3E%3ClinearGradient id='pasteGrad' x1='0' y1='0' x2='300' y2='0' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0%25' stop-color='%23098585' stop-opacity='0.9'/%3E%3Cstop offset='50%25' stop-color='%2326c6da' stop-opacity='0.85'/%3E%3Cstop offset='100%25' stop-color='%2380deea' stop-opacity='0.9'/%3E%3C/linearGradient%3E%3ClinearGradient id='whiteGrad' x1='0' y1='0' x2='300' y2='0'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='100%25' stop-color='%23e0f7fa'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.95;
 }
 
 @media (max-width: 768px) {
   .section-title {
     font-size: 2rem;
-    padding: 6px 16px 16px;
-  }
-  .section-title::before {
-    height: 48px;
-    min-width: 200px;
   }
 }
 

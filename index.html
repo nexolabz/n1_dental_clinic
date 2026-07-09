@@ -5,8 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/n1_dental_clinic/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NovaDental | Premium Family & Cosmetic Dentistry</title>
-    <script type="module" crossorigin src="/n1_dental_clinic/assets/index-CVwSzAMu.js"></script>
-    <link rel="stylesheet" crossorigin href="/n1_dental_clinic/assets/index-BeThi7_R.css">
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          document.documentElement.classList.add('dark-theme');
+        } else {
+          document.documentElement.classList.remove('dark-theme');
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/n1_dental_clinic/assets/index-BmMAGvTx.js"></script>
+    <link rel="stylesheet" crossorigin href="/n1_dental_clinic/assets/index-B1khtajp.css">
   </head>
   <body>
     <div id="root"></div>

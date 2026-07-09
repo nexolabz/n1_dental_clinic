@@ -1,30 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
-import Stats from './components/Stats/Stats';
-import Services from './components/Services/Services';
 import About from './components/About/About';
-import WhyChooseUs from './components/WhyChooseUs/WhyChooseUs';
 import Dentists from './components/Dentists/Dentists';
 import Testimonials from './components/Testimonials/Testimonials';
-import FAQ from './components/FAQ/FAQ';
+import Tips from './components/Tips/Tips';
 import AppointmentForm from './components/AppointmentForm/AppointmentForm';
+import ContactUs from './components/ContactUs/ContactUs';
 import Footer from './components/Footer/Footer';
 
 export default function App() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('section-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.05, // Trigger when 5% of section is visible
+        rootMargin: '0px 0px -40px 0px' // Adjust scroll trigger line
+      }
+    );
+
+    const sections = document.querySelectorAll('.section');
+    sections.forEach((sec) => observer.observe(sec));
+
+    return () => {
+      sections.forEach((sec) => observer.unobserve(sec));
+    };
+  }, []);
+
   return (
     <div className="app-root">
       <Navbar />
       <main>
         <Hero />
-        <Stats />
-        <Services />
         <About />
-        <WhyChooseUs />
         <Dentists />
-        <FAQ />
         <Testimonials />
+        <Tips />
         <AppointmentForm />
+        <ContactUs />
       </main>
       <Footer />
     </div>

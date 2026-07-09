@@ -1,0 +1,140 @@
+/* Slider Layout */
+.slider-layout-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.slider-frame {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 8px solid var(--bg-card); /* Matches original hero-main-img border */
+  background-color: #000000;
+  user-select: none;
+  cursor: col-resize;
+  touch-action: pan-y;
+}
+
+.image-layer {
+  width: 100%;
+  pointer-events: none;
+}
+
+.after-layer {
+  position: relative;
+  height: auto;
+  z-index: 1;
+}
+
+.before-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 2;
+}
+
+.slider-img {
+  width: 100%;
+  display: block;
+}
+
+.after-layer .slider-img {
+  height: auto;
+}
+
+.before-layer .slider-img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Before & After Labels Overlay */
+.label-overlay {
+  position: absolute;
+  bottom: 16px;
+  padding: 6px 12px;
+  background-color: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: 0.95rem; /* 16px compact sizing */
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 8;
+  transition: opacity 0.15s ease-out;
+}
+
+.before-label {
+  left: 16px;
+}
+
+.after-label {
+  right: 16px;
+}
+
+/* Slider Handle */
+.slider-handle-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #ffffff;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.slider-handle-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: var(--primary);
+  border: 3px solid #ffffff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+  cursor: col-resize;
+}
+
+/* Bounce Visual Feedback Animations */
+.slider-frame.bounce-left {
+  animation: bounceLeftEffect 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.slider-frame.bounce-right {
+  animation: bounceRightEffect 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes bounceLeftEffect {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+@keyframes bounceRightEffect {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-8px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Align teeth position between before and after images */
+.before-img {
+  transform: none;
+}

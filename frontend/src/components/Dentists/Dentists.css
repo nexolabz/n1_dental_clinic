@@ -3,6 +3,11 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+.dentists-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .dentists-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -24,90 +29,341 @@
   }
 }
 
-/* Dentist Card */
-.dentist-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
+/* Full Doctor Apron/Shirt Card Layout */
+.doctor-apron-card {
+  position: relative;
+  background-color: #ffffff !important;
+  border: 2px solid #cbd5e1 !important;
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  padding: 40px 24px 44px;
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  transition: all var(--transition-normal);
+  overflow: hidden; /* Clips the sleeves and curved hem at card corners */
 }
 
-.dentist-card:hover {
+.doctor-apron-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-hover);
-  border-color: var(--primary-light);
+  border-color: var(--primary) !important;
 }
 
-/* Avatar block */
-.dentist-avatar-container {
-  height: 220px;
+/* Short Sleeves at the shoulders */
+.apron-sleeve {
+  position: absolute;
+  top: 105px;
+  width: 44px;
+  height: 64px;
+  background-color: #ffffff;
+  border-bottom: 2px solid #cbd5e1;
+  z-index: 1;
+}
+
+.sleeve-left {
+  left: -4px;
+  border-left: 2px solid #cbd5e1;
+  transform: skewY(15deg);
+  border-radius: 0 0 6px 0;
+}
+
+.sleeve-right {
+  right: -4px;
+  border-right: 2px solid #cbd5e1;
+  transform: skewY(-15deg);
+  border-radius: 0 0 0 6px;
+}
+
+/* Head Container with photo */
+.apron-head-container {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--bg-soft);
-  overflow: hidden;
-}
-
-.dentist-avatar {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  z-index: 2;
+  border: 4px solid #ffffff;
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+  background-color: var(--bg-soft);
+  flex-shrink: 0;
+}
+
+.apron-doctor-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
   transition: transform var(--transition-normal);
 }
 
-.dentist-card:hover .dentist-avatar {
-  transform: scale(1.1) rotate(5deg);
+.doctor-apron-card:hover .apron-doctor-photo {
+  transform: scale(1.08);
 }
 
-.dentist-initials {
-  font-family: var(--font-headings);
-  font-size: 2.8rem;
-  font-weight: 800;
-  letter-spacing: -1.5px;
-}
-
+/* Experience Badge */
 .dentist-exp-badge {
   position: absolute;
-  bottom: 12px;
-  background-color: rgba(253, 255, 254, 0.9);
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(253, 255, 254, 0.95);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   color: var(--text-main);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-full);
-  padding: 4px 14px;
-  font-size: 0.75rem;
+  padding: 3px 10px;
+  font-size: 0.7rem;
   font-weight: 700;
   font-family: var(--font-headings);
-  z-index: 3;
+  z-index: 11;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
 }
 
 @media (prefers-color-scheme: dark) {
   .dentist-exp-badge {
-    background-color: rgba(18, 33, 33, 0.9);
+    background-color: rgba(18, 33, 33, 0.95);
   }
 }
 
-/* Info block */
+/* Pointed Shirt Collar Wings */
+.apron-shirt-collar {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 40px;
+  z-index: 3;
+}
+
+.collar-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 61px;
+  height: 36px;
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-top: none;
+  clip-path: polygon(0 0, 100% 0, 75% 100%, 0 45%);
+}
+
+.collar-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 61px;
+  height: 36px;
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-top: none;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 25% 100%);
+}
+
+.collar-top-button {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  background-color: #f8fafc;
+  border: 1.5px solid #94a3b8;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+/* Scrubs underneath V-neck opening */
+.apron-scrubs {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 40px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 1;
+}
+
+.scrubs-v-neck {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Vertical Button Placket with double stitching details */
+.apron-placket {
+  position: absolute;
+  top: 115px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  background-color: #ffffff;
+  border-left: 1.5px dashed #cbd5e1;
+  border-right: 1.5px dashed #cbd5e1;
+  z-index: 1;
+}
+
+/* Buttons running down the shirt placket */
+.apron-buttons-line {
+  position: absolute;
+  top: 146px;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 190px);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.apron-button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f8fafc;
+  border: 1.5px solid #94a3b8;
+  box-shadow: inset 0 1px 1px #ffffff, 0 1px 2px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.apron-button::after {
+  content: '::';
+  font-size: 7px;
+  color: #64748b;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* Pentagon Chest Pocket (Viewer's right / Wearer's left) */
+.apron-pocket {
+  position: absolute;
+  top: 160px;
+  right: 20px;
+  width: 50px;
+  height: 56px;
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  z-index: 2;
+}
+
+.pocket-rim {
+  height: 12px;
+  background-color: #ffffff;
+  border-bottom: 1.5px dashed #cbd5e1;
+}
+
+.pocket-pen {
+  position: absolute;
+  width: 5px;
+  height: 18px;
+  border-radius: 2px 2px 0 0;
+  top: -8px;
+}
+
+.pen-gold {
+  left: 10px;
+  background-color: var(--secondary);
+  border: 1px solid var(--secondary-dark);
+}
+
+.pen-silver {
+  left: 18px;
+  background-color: #94a3b8;
+  border: 1px solid #64748b;
+}
+
+/* Name Tag (Viewer's left / Wearer's right) */
+.apron-nametag {
+  position: absolute;
+  top: 162px;
+  left: 20px;
+  width: 82px;
+  height: 44px;
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  z-index: 2;
+}
+
+.tag-brand {
+  font-size: 0.45rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  margin-bottom: 1px;
+}
+
+.tag-name {
+  font-size: 0.55rem;
+  font-weight: 800;
+  color: #334155;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tag-status {
+  font-size: 0.4rem;
+  font-weight: 700;
+  color: #16a34a;
+  background-color: #f0fdf4;
+  padding: 1px 4px;
+  border-radius: 2px;
+  margin-top: 2px;
+  border: 0.5px solid rgba(22, 163, 74, 0.15);
+}
+
+/* Curved Bottom Hemline (Matching drawing) */
+.apron-bottom-hem {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 18px;
+  border-top: 1.5px solid #cbd5e1;
+  border-radius: 50% 50% 0 0;
+  background-color: #f8fafc;
+  z-index: 2;
+}
+
+/* Info Details (Overlay on Shirt body) */
 .dentist-info {
-  padding: 32px;
+  margin-top: 120px;
+  padding: 24px 16px 20px;
+  background-color: rgba(255, 255, 255, 0.85); /* Translucent overlay sheet */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   flex-grow: 1;
+  width: 100%;
 }
 
 .dentist-name {
@@ -115,29 +371,30 @@
   font-weight: 700;
   margin-bottom: 4px;
   letter-spacing: -0.5px;
+  color: var(--text-main);
 }
 
 .dentist-role {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .dentist-bio {
   font-size: 0.85rem;
   color: var(--text-muted);
   line-height: 1.6;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   flex-grow: 1;
 }
 
 .dentist-socials {
   width: 100%;
   border-top: 1px solid var(--border-light);
-  padding-top: 16px;
+  padding-top: 12px;
 }
 
 .social-tag {

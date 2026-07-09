@@ -1,0 +1,248 @@
+.contact-section {
+  background-color: var(--bg-soft);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+/* Opening Hours Card */
+.contact-hours-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-main);
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 12px;
+}
+
+.contact-hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.contact-hours-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.02rem;
+  border-bottom: 1px dashed var(--border-light);
+  padding-bottom: 8px;
+}
+
+.day-label {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.time-val {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.emergency-val {
+  color: var(--accent);
+  background-color: #fdf2f0;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.holiday-val {
+  color: #ef4444;
+  background-color: #fef2f2;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.break-val {
+  color: var(--secondary-dark);
+  background-color: var(--secondary-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.hours-note {
+  display: flex;
+  gap: 12px;
+  background-color: var(--bg-soft);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  align-items: flex-start;
+}
+
+.note-icon {
+  font-size: 1.25rem;
+}
+
+.hours-note p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* Contact Info Column cards */
+.contact-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  color: inherit;
+}
+
+.clickable-card {
+  cursor: pointer;
+}
+
+.clickable-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.info-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: all var(--transition-normal);
+}
+
+.clickable-card:hover .info-icon {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.info-text h4 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.info-text p {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.phone-value {
+  color: var(--primary) !important;
+  font-family: var(--font-headings);
+  font-size: 1.15rem !important;
+}
+
+/* Shaking phone animation */
+.call-icon-ringing .phone-svg {
+  animation: callIconShake 2.5s ease-in-out infinite;
+}
+
+/* Sliding envelope animation on hover */
+.email-card:hover .email-icon-sliding .envelope-svg {
+  animation: emailIconSlide 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes callIconShake {
+  0%, 100%, 50% { transform: rotate(0); }
+  5%, 15%, 25%, 35%, 45% { transform: rotate(12deg); }
+  10%, 20%, 30%, 40% { transform: rotate(-12deg); }
+}
+
+@keyframes emailIconSlide {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
+  60% { transform: translateY(2px); }
+  100% { transform: translateY(0); }
+}
+
+/* Booking Card highlight and pulse */
+.booking-value {
+  color: var(--primary) !important;
+  font-family: var(--font-headings);
+  font-size: 1.15rem !important;
+}
+
+.booking-icon-pulsing {
+  animation: bookingPulse 2.2s infinite;
+}
+
+.booking-card:hover .calendar-svg {
+  transform: scale(1.1) rotate(3deg);
+  transition: transform var(--transition-fast);
+}
+
+@keyframes bookingPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(9, 133, 133, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(9, 133, 133, 0);
+  }
+}
+
+/* Responsive viewports */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .contact-hours-card {
+    padding: 24px;
+  }
+  
+  .info-card {
+    padding: 16px 20px;
+    gap: 16px;
+  }
+}

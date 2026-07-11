@@ -6,6 +6,15 @@
   animation: heroEntrance 1.2s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 
+@media (min-width: 992px) {
+  .hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 @keyframes heroEntrance {
   from {
     opacity: 0;

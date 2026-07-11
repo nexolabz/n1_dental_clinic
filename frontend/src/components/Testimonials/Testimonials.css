@@ -2,7 +2,7 @@
   background-color: var(--bg-soft);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-  padding: 80px 24px 60px;
+  padding: 100px 24px 80px;
 }
 
 .testimonials-container {
@@ -16,163 +16,214 @@
 .testimonials-carousel-wrapper {
   overflow: hidden;
   width: 100%;
-  max-width: 760px;
+  max-width: 820px;
   margin: 0 auto;
   position: relative;
 }
 
 .testimonials-carousel-track {
   display: flex;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   width: 100%;
 }
 
 .testimonial-slide {
   min-width: 100%;
   box-sizing: border-box;
-  padding: 12px;
+  padding: 16px;
 }
 
-/* Vintage Postcard Card Styling */
-.testimonial-card-postal {
-  background-color: #f3ebd6; /* Vintage cardstock color matching sketch */
-  border: 2px solid #dfd3b2;
-  border-radius: 4px; /* Paper card sharp corners */
-  padding: 32px;
-  box-shadow: 0 6px 20px rgba(74, 62, 41, 0.08);
+/* Modern Testimonial Card Styling */
+.testimonial-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-md);
   display: grid;
-  grid-template-columns: 1.1fr auto 1.2fr;
-  gap: 28px;
-  align-items: stretch;
-  min-height: 220px;
-  transition: all var(--transition-normal);
+  grid-template-columns: 0.8fr auto 1.2fr;
+  gap: 40px;
+  align-items: center;
+  min-height: 240px;
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  overflow: visible; /* Handle overlays crossing card borders */
 }
 
-.testimonial-card-postal:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(74, 62, 41, 0.12);
-  border-color: #cfc29d;
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
 }
 
-/* Left Column: Polaroid photo frame */
-.postal-left-column {
+/* Left Column: Profile photo frame with dental mirror overlay */
+.testimonial-left-column {
+  position: relative;
+  width: 200px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
+  overflow: visible; /* Handle graphic extending out */
 }
 
-.postal-photo-frame {
-  background-color: #ffffff;
-  padding: 8px 8px 20px; /* Polaroid photograph white bottom padding */
-  border: 1px solid #e5dec6;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transform: rotate(-2deg); /* Vintage tilt */
-  width: 100%;
-  max-width: 220px;
+.testimonial-photo-frame {
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  z-index: 3; /* Sits on top of the mirror tool blue circle */
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: transform var(--transition-normal);
 }
 
-.testimonial-card-postal:hover .postal-photo-frame {
-  transform: rotate(0deg) scale(1.03);
-}
-
-.postal-patient-img {
+.testimonial-patient-img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
+.mirror-reflection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* Shiny blue-sky mirror reflection gradient */
+  background: linear-gradient(
+    135deg,
+    rgba(173, 216, 230, 0.95) 0%,
+    rgba(135, 206, 250, 0.9) 25%,
+    rgba(255, 255, 255, 0.95) 45%,
+    rgba(255, 255, 255, 0.95) 55%,
+    rgba(30, 144, 255, 0.85) 75%,
+    rgba(0, 0, 139, 0.9) 100%
+  );
+  opacity: 1;
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 4;
+}
+
+/* Dental Mirror Tool overlay */
+.dental-mirror-tool {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Center of the mirror head is at 50% X and 12.5% Y of image height.
+     We align that point with the center of the left column. */
+  transform: translate(-50%, -12.5%) rotate(35deg); /* Tilt to the left, handle points down-left */
+  transform-origin: 50% 12.5%;
+  width: 172px; /* Matches the width of the metal rim around the 136px photo circle */
+  height: auto;
+  pointer-events: none;
+  z-index: 2; /* Sits underneath the photo frame, but its handle is visible extending outward */
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: drop-shadow(-6px 12px 16px rgba(0, 0, 0, 0.15));
+}
+
 /* Center Vertical Divider Line */
-.postal-divider {
-  width: 1.5px;
-  background-color: #dcd0ac;
-  margin: 10px 0;
+.testimonial-divider {
+  width: 1px;
+  background-color: var(--border-color);
+  height: 80%;
+  align-self: center;
 }
 
 /* Right Column details */
-.postal-right-column {
-  position: relative;
+.testimonial-right-column {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: flex-start;
+  text-align: left;
   width: 100%;
 }
 
+/* Meta info */
+.testimonial-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.testimonial-patient-name {
+  font-family: var(--font-headings);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.testimonial-time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
 /* Stars ratings line */
-.postal-rating-stars-line {
+.testimonial-rating-stars {
   display: flex;
   align-items: center;
   gap: 4px;
   margin-bottom: 16px;
 }
 
-.postal-star {
-  font-size: 1.15rem;
-  color: #dfd3b2; /* Soft empty star color matching postcard cardstock */
-}
-
-.postal-star.active {
-  color: #eab308; /* Bright golden yellow active star */
-}
-
-/* Meta info */
-.postal-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  margin-bottom: 6px;
-}
-
-.postal-patient-name {
-  font-family: var(--font-headings);
+.testimonial-star {
   font-size: 1.25rem;
-  font-weight: 800;
-  color: #4a3e29;
-  line-height: 1.2;
+  color: var(--border-color);
+  transition: color var(--transition-fast);
 }
 
-.postal-time {
-  font-size: 0.78rem;
-  color: #8c7d62;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 2px;
+.testimonial-star.active {
+  color: var(--secondary); /* Premium gold active star */
 }
 
-/* Notebook Lined background rules for quote text */
-.postal-ruled-message {
+/* Quote Box */
+.testimonial-quote-box {
+  position: relative;
   width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0) 95%, #dcd0ac 95%); /* Ruled lines */
-  background-size: 100% 28px;
-  line-height: 28px;
-  padding-bottom: 8px;
+  padding-left: 24px;
 }
 
-.postal-quote-text {
-  font-size: 0.92rem;
-  color: #3f3521;
-  line-height: 28px;
+.testimonial-quote-icon {
+  position: absolute;
+  top: -12px;
+  left: -4px;
+  font-size: 3.5rem;
+  font-family: var(--font-headings);
+  color: var(--primary-light);
+  line-height: 1;
+  pointer-events: none;
+  font-weight: 900;
+}
+
+.testimonial-quote-text {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.6;
   margin: 0;
   font-style: italic;
-  text-align: left;
+  font-family: var(--font-body);
 }
 
 /* Indicators */
 .carousel-indicators {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: 32px;
 }
 
 .indicator-dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background-color: #dfd3b2;
+  background-color: var(--border-color);
   border: none;
   cursor: pointer;
   padding: 0;
@@ -180,51 +231,73 @@
 }
 
 .indicator-dot:hover {
-  background-color: #cfc29d;
+  background-color: var(--text-light);
 }
 
 .indicator-dot.active {
-  background-color: #4a3e29;
-  transform: scale(1.25);
-  box-shadow: 0 0 8px rgba(74, 62, 41, 0.2);
+  background-color: var(--primary);
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(9, 133, 133, 0.2);
+}
+
+/* Hover effects */
+.testimonial-card:hover .dental-mirror-tool {
+  /* Swing the handle slightly on hover, indicating active inspection */
+  transform: translate(-50%, -12.5%) rotate(15deg);
+}
+
+.testimonial-card:hover .mirror-reflection-overlay {
+  opacity: 0; /* Reveal the patient photo */
+}
+
+.testimonial-card:hover .testimonial-photo-frame {
+  transform: scale(1.05);
 }
 
 /* Responsive viewports */
-@media (max-width: 650px) {
-  .testimonial-card-postal {
+@media (max-width: 768px) {
+  .testimonial-card {
     grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 24px;
+    gap: 24px;
+    padding: 30px;
     text-align: center;
     justify-items: center;
   }
   
-  .postal-divider {
+  .testimonial-divider {
     width: 100%;
-    height: 1.5px;
+    height: 1px;
     margin: 8px 0;
   }
   
-  .postal-meta {
-    margin-right: 0;
+  .testimonial-right-column {
     align-items: center;
     text-align: center;
-    width: 100%;
   }
-  
-  .postal-stamp {
-    position: relative;
-    top: auto;
-    right: auto;
-    margin-bottom: 16px;
-    transform: none;
-  }
-  
-  .postal-right-column {
+
+  .testimonial-meta {
     align-items: center;
   }
   
-  .postal-photo-frame {
-    transform: none;
+  .testimonial-quote-box {
+    padding-left: 0;
+  }
+
+  .testimonial-quote-icon {
+    display: none; /* Hide quote icon on small screens to avoid clutter */
+  }
+
+  .testimonial-left-column {
+    width: 150px;
+    height: 150px;
+  }
+
+  .testimonial-photo-frame {
+    width: 106px;
+    height: 106px;
+  }
+
+  .dental-mirror-tool {
+    width: 134px;
   }
 }

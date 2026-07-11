@@ -4,22 +4,13 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: transparent;
-  border-bottom: 1px solid transparent;
+  background-color: var(--bg-main);
+  border-bottom: 1px solid var(--border-color);
   transition: all var(--transition-normal);
 }
 
 .header.scrolled {
-  background-color: rgba(253, 255, 254, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.35);
   box-shadow: var(--shadow-sm);
-}
-
-:root.dark-theme .header.scrolled {
-  background-color: rgba(11, 19, 19, 0.85);
-  border-bottom: 1px solid rgba(27, 47, 47, 0.35);
 }
 
 .navbar {
@@ -231,7 +222,7 @@
 .toothpaste-path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: drawPaste 12s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+  animation: drawPaste 12s linear infinite;
 }
 
 .toothpaste-tube-wrapper {
@@ -243,7 +234,7 @@
   pointer-events: auto; /* Enable mouse hover */
   cursor: pointer;
   z-index: 12;
-  animation: moveTube 12s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+  animation: moveTube 12s linear infinite;
   transform-origin: bottom left;
 }
 
@@ -252,7 +243,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  animation: squeezeTube 12s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+  animation: squeezeTube 12s linear infinite;
   transform: rotate(0deg);
 }
 

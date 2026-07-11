@@ -1,6 +1,6 @@
 .theme-toggle-btn {
   position: fixed;
-  bottom: 30px;
+  top: 22px;
   right: 30px;
   width: 56px;
   height: 56px;
@@ -73,9 +73,9 @@
 
 @media (max-width: 768px) {
   .theme-toggle-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 48px;
-    height: 48px;
+    top: 14px;
+    right: 70px;
+    width: 40px;
+    height: 40px;
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Tips.css';
 
 const tipsList = [
@@ -53,6 +53,8 @@ const tipsList = [
 ];
 
 export default function Tips() {
+  const [activeTip, setActiveTip] = useState(null);
+
   return (
     <section id="tips" className="tips-section section">
       <div className="tips-container container">
@@ -60,23 +62,61 @@ export default function Tips() {
           <h2 className="section-title">Healthy Teeth Tips</h2>
         </div>
 
-        <div className="tips-grid">
-          {tipsList.map((tip) => (
-            <div key={tip.id} className="tip-interactive-card">
-              <div className="tip-image-wrapper">
-                <img 
-                  src={`${import.meta.env.BASE_URL || '/'}tips/${tip.image}`} 
-                  alt={tip.title} 
-                  className="tip-img"
-                />
-                <span className="tip-number">Tip 0{tip.id}</span>
-              </div>
-              <div className="tip-card-body">
-                <h3 className="tip-card-title">{tip.title}</h3>
-                <p className="tip-card-desc">{tip.description}</p>
-              </div>
+        <div className="tips-layout">
+          {/* Left Side: Scrollable Cards Container */}
+          <div className="tips-scroll-container">
+            <div className="tips-cards-grid">
+              {tipsList.map((tip) => (
+                <div 
+                  key={tip.id} 
+                  className={`tip-interactive-card ${activeTip?.id === tip.id ? 'active' : ''}`}
+                  onMouseEnter={() => setActiveTip(tip)}
+                  onMouseLeave={() => setActiveTip(null)}
+                >
+                  <div className="tip-image-wrapper">
+                    <img 
+                      src={`${import.meta.env.BASE_URL || '/'}tips/${tip.image}`} 
+                      alt={tip.title} 
+                      className="tip-img"
+                      draggable="false"
+                    />
+                    <span className="tip-number">Tip 0{tip.id}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Right Side: Toothpaste & Brush Character and Bubble */}
+          <div className="tips-character-container">
+            <div className={`tips-speech-bubble ${activeTip ? 'has-content' : 'is-default'}`}>
+              <div 
+                className="bubble-content-transition" 
+                key={activeTip ? activeTip.id : 'default'}
+              >
+                {activeTip ? (
+                  <>
+                    <h3 className="bubble-tip-title">{activeTip.title}</h3>
+                    <p className="bubble-tip-desc">{activeTip.description}</p>
+                  </>
+                ) : (
+                  <p className="bubble-tip-desc default-message">
+                    Hover over any card on the left to read my healthy teeth tips! 🪥✨
+                  </p>
+                )}
+              </div>
+              <div className="bubble-arrow"></div>
+            </div>
+            
+            <div className="character-image-wrapper">
+              <img 
+                src={`${import.meta.env.BASE_URL || '/'}toothpasteandbrush.png`} 
+                alt="Toothpaste and Brush Character" 
+                className="toothpaste-character-img"
+                draggable="false"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

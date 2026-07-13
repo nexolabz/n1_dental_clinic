@@ -35,8 +35,8 @@
 }
 
 .logo-icon {
-  width: 54px;
-  height: 54px;
+  width: 64px;
+  height: 64px;
   flex-shrink: 0;
   object-fit: contain;
   transition: transform var(--transition-normal);

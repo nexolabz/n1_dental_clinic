@@ -11,282 +11,562 @@
   width: 100%;
 }
 
-/* Layout for scroll container and character */
-.tips-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
+/* Bathroom Vanity Scene Container */
+.bathroom-scene {
   width: 100%;
-  margin-top: 40px;
+  max-width: 900px;
+  margin: 40px auto 0;
+  padding: 0 10px;
 }
 
-@media (min-width: 992px) {
-  .tips-layout {
-    grid-template-columns: 3fr 1fr;
-    gap: 48px;
-    align-items: center;
-  }
-}
-
-/* Left Side: Scrollable container */
-.tips-scroll-container {
-  max-height: 480px;
-  overflow-y: auto;
-  padding: 10px 16px 10px 10px;
-  scroll-behavior: smooth;
+/* Wall Background - Image of Bathroom */
+.bathroom-wall {
+  width: 100%;
+  aspect-ratio: 1.8; /* Maintains 612x340 proportions of the background image */
+  background-image: url('/basin.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
   border-radius: var(--radius-lg);
-  
-  /* Modern fading edge mask to indicate scrollability */
-  mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+  overflow: visible; /* Let mirror frame hover nicely */
 }
 
-@media (min-width: 992px) {
-  .tips-scroll-container {
-    max-height: none;
-    overflow-y: visible;
-    padding-right: 10px;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
+/* Transparent Grey Shaded Glass Doors on left and right */
+.bathroom-door {
+  position: absolute;
+  top: -8%; /* Align with the top side of the mirror */
+  bottom: 0; /* Extend to the bottom of the wall container */
+  width: 22%; /* Sized to sit nicely at the sides of the vanity */
+  background-color: rgba(148, 163, 184, 0.12); /* Soft transparent grey shade */
+  backdrop-filter: blur(1.5px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(1.5px);
+  border: 2px solid rgba(71, 85, 105, 0.35); /* Metal door frame */
+  z-index: 4; /* Above wall background, below mirror */
+  box-sizing: border-box;
 }
 
-/* Custom scrollbar styling */
-.tips-scroll-container::-webkit-scrollbar {
+.left-door {
+  left: 0;
+  border-left: none; /* Merge with container border */
+}
+
+.right-door {
+  right: 0;
+  border-right: none; /* Merge with container border */
+}
+
+/* Glass glare reflection */
+.bathroom-door::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Chrome door handle */
+.bathroom-door::after {
+  content: '';
+  position: absolute;
+  top: 45%;
+  width: 5px;
+  height: 48px;
+  background-color: #475569; /* Slate handle */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.left-door::after {
+  right: 10px;
+}
+
+.right-door::after {
+  left: 10px;
+}
+
+:root.dark-theme .bathroom-door {
+  background-color: rgba(30, 41, 59, 0.3); /* Dark glass shade */
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+:root.dark-theme .bathroom-door::after {
+  background-color: #94a3b8;
+}
+
+/* Brush Stand on Vanity Countertop */
+.vanity-brushstand {
+  position: absolute;
+  bottom: 31%; /* Rest exactly on the countertop line */
+  right: 27%; /* Sits between basin and folded towels */
+  width: 9%; /* Sized to match basin scale */
+  aspect-ratio: 1;
+  z-index: 4; /* Behind doors, on top of vanity countertop */
+  pointer-events: none;
+}
+
+/* Glowing Bathroom Sconce Lamp on Glass Doors (Front View) */
+.bathroom-lamp {
+  position: absolute;
+  top: 10%; /* Near the top side of the mirror */
+  width: 44px;
+  height: 68px;
+  z-index: 10;
+}
+
+.left-door .bathroom-lamp {
+  right: 15%; /* Positioned towards the inner mirror side of the left door */
+}
+
+.right-door .bathroom-lamp {
+  left: 15%; /* Positioned towards the inner mirror side of the right door */
+}
+
+/* Mounting Bracket plate (directly behind, centered) */
+.lamp-mount {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 32px;
+  background-color: #1e293b; /* Dark charcoal metal */
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+
+/* Supporting bracket arm (centered) */
+.lamp-arm {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 6px;
+  height: 36px;
+  background-color: #1e293b;
+  border-radius: 1px;
+  z-index: 2;
 }
 
-.tips-scroll-container::-webkit-scrollbar-track {
-  background: transparent;
+.lamp-arm::after {
+  /* horizontal support plate under cup */
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 4px;
+  background-color: #1e293b;
 }
 
-.tips-scroll-container::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 9999px;
-  transition: background var(--transition-fast);
+/* Base holder cup (centered) */
+.lamp-base-cup {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 6px;
+  background-color: #0f172a;
+  border-radius: 0 0 2px 2px;
+  z-index: 3;
 }
 
-.tips-scroll-container::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+/* Glowing glass cylinder shade (centered) */
+.lamp-shade {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 40px;
+  background: linear-gradient(to bottom, #ffffff 0%, #fde047 100%);
+  border-radius: 3px;
+  box-shadow: 
+    0 0 16px rgba(253, 224, 71, 0.85), 
+    0 0 30px rgba(234, 179, 8, 0.5), 
+    inset 0 0 6px rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(254, 240, 138, 0.35);
+  animation: warmGlow 3.5s ease-in-out infinite alternate;
+  z-index: 4;
 }
 
-/* Grid of Cards */
-.tips-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-@media (min-width: 992px) {
-  .tips-cards-grid {
-    grid-template-columns: repeat(4, 1fr);
+@keyframes warmGlow {
+  0% {
+    box-shadow: 
+      0 0 12px rgba(253, 224, 71, 0.75), 
+      0 0 25px rgba(234, 179, 8, 0.4), 
+      inset 0 0 6px rgba(255, 255, 255, 0.8);
+    filter: brightness(0.98);
+  }
+  100% {
+    box-shadow: 
+      0 0 20px rgba(253, 224, 71, 0.95), 
+      0 0 45px rgba(234, 179, 8, 0.65), 
+      inset 0 0 8px rgba(255, 255, 255, 0.9);
+    filter: brightness(1.06);
   }
 }
 
-@media (max-width: 576px) {
-  .tips-cards-grid {
-    grid-template-columns: 1fr;
-  }
+/* Dark Mode visibility overrides for Sconce Lamp Stand */
+:root.dark-theme .lamp-mount {
+  background-color: #64748b; /* Lighter metallic grey */
+  box-shadow: 0 0 8px rgba(253, 224, 71, 0.2), 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Interactive Card Styling */
-.tip-interactive-card {
+:root.dark-theme .lamp-arm {
+  background-color: #64748b;
+}
+
+:root.dark-theme .lamp-arm::after {
+  background-color: #64748b;
+}
+
+:root.dark-theme .lamp-base-cup {
+  background-color: #334155;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* In dark theme, we add a soft dark overlay to make it look like a dimmed bathroom at night */
+:root.dark-theme .bathroom-wall::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(11, 21, 23, 0.4); /* Dimming overlay */
+  border-radius: calc(var(--radius-lg) - 2px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Rectangular Mirror Frame (Positioned higher, horizontal rectangle) */
+.bathroom-mirror {
+  width: 52%; /* Wider horizontal rectangle */
+  height: 48%; /* Balanced height */
+  position: absolute;
+  top: -8%; /* Positioned further up, away from basin */
+  left: 50%;
+  transform: translateX(-50%);
   background-color: var(--bg-card);
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border: 4px solid #475569; /* Sleek metal frame */
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15), inset 0 0 8px rgba(0, 0, 0, 0.05);
+  z-index: 5;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  border-radius: 2px; /* Sharp rectangular card */
+  transition: box-shadow 0.3s ease;
+}
+
+:root.dark-theme .bathroom-mirror {
+  border-color: #1e2e30;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 0 20px rgba(9, 133, 133, 0.25);
+  z-index: 6; /* Sit above dark theme overlay */
+}
+
+.mirror-glass {
+  width: 100%;
+  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
-  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
-.tip-interactive-card:hover,
-.tip-interactive-card.active {
-  transform: translateY(-4px) scale(1.02);
-  border-color: var(--primary);
-  box-shadow: var(--shadow-md);
-}
-
-.tip-image-wrapper {
-  position: relative;
+/* Slideshow Track inside Mirror */
+.mirror-slideshow-track {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
+  position: relative;
+}
+
+.mirror-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row; /* Horizontal split: image on left, info on right */
+  justify-content: space-between;
+  animation: slideFadeIn 0.5s ease both;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.slide-image-box {
+  width: 50%; /* Left half */
+  height: 100%;
   overflow: hidden;
   background-color: var(--bg-soft);
+  border-right: 1px solid var(--border-color);
+  position: relative;
 }
 
-.tip-img {
+.slide-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform var(--transition-normal);
 }
 
-.tip-interactive-card:hover .tip-img {
-  transform: scale(1.08);
+.slide-content {
+  width: 50%; /* Right half */
+  height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Align text left */
+  text-align: left;
+  background-color: var(--bg-card);
+  position: relative;
+  box-sizing: border-box;
 }
 
-.tip-number {
+.slide-tip-number {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  background-color: rgba(9, 133, 133, 0.85); /* Primary color themed badge */
+  top: 16px;
+  left: 24px;
+  background-color: var(--primary);
   color: #ffffff;
-  padding: 4px 8px;
-  font-size: 0.72rem;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
   font-weight: 700;
-  border-radius: var(--radius-sm);
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(9, 133, 133, 0.25);
   z-index: 2;
 }
 
-/* Right Side: Character & Speech Bubble */
-.tips-character-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 20px;
-}
-
-.tips-speech-bubble {
-  background-color: var(--bg-card);
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  width: 100%;
-  max-width: 380px;
-  min-height: 140px;
-  margin-bottom: 30px;
-  position: relative;
-  box-shadow: var(--shadow-md);
-  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tips-speech-bubble.has-content {
-  border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(9, 133, 133, 0.08);
-}
-
-/* Speech Bubble Arrow */
-.bubble-arrow {
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-top: 12px solid var(--border-color);
-  transition: border-top-color var(--transition-normal);
-}
-
-.tips-speech-bubble.has-content .bubble-arrow {
-  border-top-color: var(--primary);
-}
-
-.bubble-arrow::after {
-  content: '';
-  position: absolute;
-  top: -14px;
-  left: -10px;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid var(--bg-card);
-}
-
-/* Animation on Bubble Content Change */
-.bubble-content-transition {
-  animation: bubblePop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  width: 100%;
-  text-align: center;
-}
-
-@keyframes bubblePop {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.bubble-tip-title {
+.slide-title {
   font-family: var(--font-headings);
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 12px;
-  line-height: 1.2;
+  color: var(--text-main);
+  margin-top: 12px;
+  margin-bottom: 6px;
+  line-height: 1.25;
 }
 
-.bubble-tip-desc {
-  font-size: 0.95rem;
-  color: var(--text-main);
-  line-height: 1.6;
+.slide-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
   margin: 0;
 }
 
-.bubble-tip-desc.default-message {
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-/* Character Image Container & Float Animation */
-.character-image-wrapper {
+/* Translucent control buttons */
+.mirror-control-btn {
+  position: absolute;
+  top: 50%; /* Vertically centered in mirror */
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid var(--border-color);
+  color: #1e293b;
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 240px;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all var(--transition-fast);
+  padding: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-.toothpaste-character-img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 12px 24px rgba(9, 133, 133, 0.12));
-  animation: floatCharacter 4s ease-in-out infinite alternate;
+.mirror-control-btn:hover {
+  background-color: #ffffff;
+  color: var(--primary);
+  transform: translateY(-50%) scale(1.08);
 }
 
-@keyframes floatCharacter {
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-12px) rotate(1.5deg);
-  }
+.mirror-control-btn.prev { left: 8px; }
+.mirror-control-btn.next { right: 8px; }
+
+:root.dark-theme .mirror-control-btn {
+  background-color: rgba(18, 33, 33, 0.85);
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+:root.dark-theme .mirror-control-btn:hover {
+  background-color: var(--bg-card);
+  color: var(--primary);
 }
 
-/* Responsive Overrides */
-@media (max-width: 992px) {
-  .tips-layout {
-    gap: 32px;
+/* Slideshow indicator dots - positioned at the bottom of the right panel */
+.mirror-indicators {
+  position: absolute;
+  bottom: 16px;
+  left: 75%; /* Center of the right panel */
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 10;
+}
+
+.mirror-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.mirror-indicator-dot.active {
+  background-color: var(--primary);
+  transform: scale(1.2);
+  box-shadow: 0 0 6px rgba(9, 133, 133, 0.4);
+}
+
+/* Responsive Viewports */
+@media (max-width: 768px) {
+  .bathroom-scene {
+    margin-top: 10px;
+    padding-top: 20px; /* Reset padding since mirror fits inside aspect ratio */
   }
-  .tips-scroll-container {
-    max-height: 380px;
+
+  .bathroom-wall {
+    aspect-ratio: 1.15; /* Constant aspect ratio for perfect responsive scaling */
+    height: auto;
+    background-image: url('/basin.png');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
   }
-  .tips-speech-bubble {
-    min-height: 120px;
-    padding: 20px;
+  
+  :root.dark-theme .bathroom-wall::after {
+    display: block; /* Dimming overlay on mobile */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 21, 23, 0.4);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: var(--radius-lg);
   }
-  .bubble-tip-title {
-    font-size: 1.15rem;
+
+  .bathroom-door {
+    display: none; /* Hide glass doors on mobile */
   }
-  .bubble-tip-desc {
-    font-size: 0.9rem;
+
+  .vanity-brushstand {
+    display: block;
+    bottom: 20.4%; /* Align precisely with countertop line */
+    right: 27%;
+    width: 9%;
+    z-index: 4;
+  }
+
+  .bathroom-mirror {
+    position: absolute;
+    top: 2%; /* Positioned on the top wall space */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 86%;
+    max-width: 360px;
+    height: 66%; /* Fits the top half perfectly */
+    z-index: 5;
+  }
+
+  .mirror-glass {
+    height: 100%;
+  }
+
+  .mirror-slide {
+    flex-direction: column; /* Stack vertically on mobile */
+    height: 100%;
+  }
+
+  .slide-image-box {
+    width: 100%;
+    height: 46%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+  }
+
+  .slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slide-content {
+    width: 100%;
+    height: 54%;
+    padding: 8px 12px 14px;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .slide-tip-number {
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .slide-title {
+    font-size: 0.88rem;
+    margin-top: 6px;
+    margin-bottom: 2px;
+  }
+
+  .slide-desc {
+    font-size: 0.68rem;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Control buttons centered inside the image box */
+  .mirror-control-btn {
+    top: 23%; /* Centered inside 46% height image box */
+    width: 24px;
+    height: 24px;
+  }
+
+  .mirror-control-btn.prev {
+    left: 8px;
+  }
+
+  .mirror-control-btn.next {
+    right: 8px;
+  }
+
+  /* Indicator dots centered at the bottom of the info panel */
+  .mirror-indicators {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
   }
 }

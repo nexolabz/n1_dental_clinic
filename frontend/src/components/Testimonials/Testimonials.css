@@ -290,6 +290,7 @@
   .testimonial-left-column {
     width: 150px;
     height: 150px;
+    margin-bottom: 16px; /* spacing to prevent mirror tool handle from overlapping name below */
   }
 
   .testimonial-photo-frame {
@@ -299,5 +300,10 @@
 
   .dental-mirror-tool {
     width: 134px;
+    transform: translate(-50%, -12.5%) rotate(60deg); /* Rotate more horizontally to push handle away from text */
+  }
+
+  .testimonial-card:hover .dental-mirror-tool {
+    transform: translate(-50%, -30%) rotate(75deg); /* Slide mirror tool upwards and tilt further on hover/tap */
   }
 }

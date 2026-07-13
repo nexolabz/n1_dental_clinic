@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -38,6 +39,7 @@ export default function Navbar() {
         </nav>
 
         <div className="nav-actions">
+          <ThemeToggle />
           <button className={`hamburger ${isOpen ? 'is-active' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
             <span className="line"></span>
             <span className="line"></span>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Tips.css';
 
 const tipsList = [
@@ -53,7 +53,49 @@ const tipsList = [
 ];
 
 export default function Tips() {
-  const [activeTip, setActiveTip] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const autoPlayTimer = useRef(null);
+
+  const startAutoPlay = () => {
+    stopAutoPlay();
+    autoPlayTimer.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % tipsList.length);
+    }, 5000);
+  };
+
+  const stopAutoPlay = () => {
+    if (autoPlayTimer.current) {
+      clearInterval(autoPlayTimer.current);
+    }
+  };
+
+  useEffect(() => {
+    if (isAutoPlaying) {
+      startAutoPlay();
+    } else {
+      stopAutoPlay();
+    }
+    return () => stopAutoPlay();
+  }, [isAutoPlaying]);
+
+  const nextSlide = (e) => {
+    e.stopPropagation();
+    setIsAutoPlaying(false); // Stop autoplay on manual interaction
+    setCurrentSlide((prev) => (prev + 1) % tipsList.length);
+  };
+
+  const prevSlide = (e) => {
+    e.stopPropagation();
+    setIsAutoPlaying(false); // Stop autoplay on manual interaction
+    setCurrentSlide((prev) => (prev - 1 + tipsList.length) % tipsList.length);
+  };
+
+  const handleDotClick = (idx, e) => {
+    e.stopPropagation();
+    setIsAutoPlaying(false);
+    setCurrentSlide(idx);
+  };
 
   return (
     <section id="tips" className="tips-section section">
@@ -62,62 +104,95 @@ export default function Tips() {
           <h2 className="section-title">Healthy Teeth Tips</h2>
         </div>
 
-        <div className="tips-layout">
-          {/* Left Side: Scrollable Cards Container */}
-          <div className="tips-scroll-container">
-            <div className="tips-cards-grid">
-              {tipsList.map((tip) => (
-                <div 
-                  key={tip.id} 
-                  className={`tip-interactive-card ${activeTip?.id === tip.id ? 'active' : ''}`}
-                  onMouseEnter={() => setActiveTip(tip)}
-                  onMouseLeave={() => setActiveTip(null)}
-                >
-                  <div className="tip-image-wrapper">
-                    <img 
-                      src={`${import.meta.env.BASE_URL || '/'}tips/${tip.image}`} 
-                      alt={tip.title} 
-                      className="tip-img"
-                      draggable="false"
-                    />
-                    <span className="tip-number">Tip 0{tip.id}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Side: Toothpaste & Brush Character and Bubble */}
-          <div className="tips-character-container">
-            <div className={`tips-speech-bubble ${activeTip ? 'has-content' : 'is-default'}`}>
-              <div 
-                className="bubble-content-transition" 
-                key={activeTip ? activeTip.id : 'default'}
-              >
-                {activeTip ? (
-                  <>
-                    <h3 className="bubble-tip-title">{activeTip.title}</h3>
-                    <p className="bubble-tip-desc">{activeTip.description}</p>
-                  </>
-                ) : (
-                  <p className="bubble-tip-desc default-message">
-                    Hover over any card on the left to read my healthy teeth tips! 🪥✨
-                  </p>
-                )}
+        {/* Bathroom vanity scene container */}
+        <div className="bathroom-scene">
+          {/* Wall Background Image */}
+          <div className="bathroom-wall">
+            {/* Transparent Grey Glass Doors */}
+            <div className="bathroom-door left-door">
+              <div className="bathroom-lamp">
+                <div className="lamp-mount"></div>
+                <div className="lamp-arm"></div>
+                <div className="lamp-base-cup"></div>
+                <div className="lamp-shade"></div>
               </div>
-              <div className="bubble-arrow"></div>
+            </div>
+            <div className="bathroom-door right-door">
+              <div className="bathroom-lamp">
+                <div className="lamp-mount"></div>
+                <div className="lamp-arm"></div>
+                <div className="lamp-base-cup"></div>
+                <div className="lamp-shade"></div>
+              </div>
             </div>
             
-            <div className="character-image-wrapper">
-              <img 
-                src={`${import.meta.env.BASE_URL || '/'}toothpasteandbrush.png`} 
-                alt="Toothpaste and Brush Character" 
-                className="toothpaste-character-img"
-                draggable="false"
-              />
+            {/* Brush Stand sitting on the vanity countertop */}
+            <img 
+              src={`${import.meta.env.BASE_URL || '/'}brushstand.png`} 
+              alt="Brush Stand" 
+              className="vanity-brushstand"
+              draggable="false"
+            />
+            
+            {/* Rectangular Mirror with Slideshow */}
+            <div className="bathroom-mirror">
+              <div className="mirror-glass">
+                {/* Active Slide */}
+                <div className="mirror-slideshow-track">
+                  <div className="mirror-slide" key={currentSlide}>
+                    <div className="slide-image-box">
+                      <img 
+                        src={`${import.meta.env.BASE_URL || '/'}tips/${tipsList[currentSlide].image}`} 
+                        alt={tipsList[currentSlide].title} 
+                        className="slide-img"
+                        draggable="false"
+                      />
+                    </div>
+                    <div className="slide-content">
+                      <span className="slide-tip-number">Tip 0{tipsList[currentSlide].id}</span>
+                      <h3 className="slide-title">{tipsList[currentSlide].title}</h3>
+                      <p className="slide-desc">{tipsList[currentSlide].description}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Slideshow Control Buttons */}
+                <button 
+                  className="mirror-control-btn prev" 
+                  onClick={prevSlide}
+                  aria-label="Previous Tip"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button 
+                  className="mirror-control-btn next" 
+                  onClick={nextSlide}
+                  aria-label="Next Tip"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+
+                {/* Slideshow Indicators (Dots) */}
+                <div className="mirror-indicators">
+                  {tipsList.map((_, idx) => (
+                    <button
+                      key={idx}
+                      className={`mirror-indicator-dot ${idx === currentSlide ? 'active' : ''}`}
+                      onClick={(e) => handleDotClick(idx, e)}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
+
       </div>
     </section>
   );

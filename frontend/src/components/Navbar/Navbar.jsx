@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import './Navbar.css';
 
-export default function Navbar() {
+export default function Navbar({ onHomeClick }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -18,21 +18,37 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar container">
-        <a href="#home" className="logo">
+        <a href="#home" onClick={() => { setIsOpen(false); if (onHomeClick) onHomeClick(); }} className="logo">
           <img src={`${import.meta.env.BASE_URL || '/'}icon.png`} alt='icon' className="logo-icon"/>
           <span className="logo-text">Nova<span className="logo-subtext">Dental</span></span>
         </a>
 
+        {/* Overlay backdrop for mobile menu */}
+        <div className={`nav-overlay ${isOpen ? 'active' : ''}`} onClick={() => setIsOpen(false)} />
+
         <nav className={`nav-menu ${isOpen ? 'active' : ''}`}>
           <ul className="nav-list">
-            <li><a href="#home" onClick={() => setIsOpen(false)} className="nav-link">Home</a></li>
+            <li><a href="#home" onClick={() => { setIsOpen(false); if (onHomeClick) onHomeClick(); }} className="nav-link">Home</a></li>
             <li><a href="#about" onClick={() => setIsOpen(false)} className="nav-link">Our Services</a></li>
             <li><a href="#doctors" onClick={() => setIsOpen(false)} className="nav-link">Our Dentist</a></li>
             <li><a href="#testimonials" onClick={() => setIsOpen(false)} className="nav-link">Reviews</a></li>
             <li><a href="#tips" onClick={() => setIsOpen(false)} className="nav-link">Tips</a></li>
+            <li><a href="#gallery" onClick={() => setIsOpen(false)} className="nav-link">Gallery</a></li>
             <li><a href="#appointment" onClick={() => setIsOpen(false)} className="nav-link">Appointment</a></li>
             <li><a href="#contact" onClick={() => setIsOpen(false)} className="nav-link">Contact Us</a></li>
           </ul>

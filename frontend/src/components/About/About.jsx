@@ -71,9 +71,6 @@ const treatmentsList = [
 export default function About() {
   const [selectedService, setSelectedService] = useState(null);
 
-  // Duplicate list to achieve seamless infinite marquee loop
-  const marqueeList = [...treatmentsList, ...treatmentsList];
-
   return (
     <section id="about" className="about-section section">
       <div className="about-container container">
@@ -82,30 +79,28 @@ export default function About() {
           <h2 className="section-title">Our Services</h2>
         </div>
 
-        {/* Infinite Scroll Marquee Slider */}
-        <div className="treatments-marquee-container">
-          <div className="treatments-marquee-track">
-            {marqueeList.map((item, idx) => (
-              <div 
-                key={`${item.id}-${idx}`} 
-                className="treatment-card"
-                onClick={() => setSelectedService(item)}
-              >
-                <div className="treatment-image-box">
-                  <img 
-                    src={`${import.meta.env.BASE_URL || '/'}services/${item.image}`} 
-                    alt={item.title} 
-                    className="treatment-img-file"
-                    draggable="false"
-                  />
-                </div>
-                <div className="treatment-card-body">
-                  <h3 className="treatment-card-title">{item.title}</h3>
-                  <p className="treatment-card-desc">{item.description}</p>
-                </div>
+        {/* Stable 2-Row, 4-Column Services Grid */}
+        <div className="treatments-grid">
+          {treatmentsList.map((item, idx) => (
+            <div 
+              key={item.id} 
+              className="treatment-card"
+              onClick={() => setSelectedService(item)}
+            >
+              <div className="treatment-image-box">
+                <img 
+                  src={`${import.meta.env.BASE_URL || '/'}services/${item.image}`} 
+                  alt={item.title} 
+                  className="treatment-img-file"
+                  draggable="false"
+                />
               </div>
-            ))}
-          </div>
+              <div className="treatment-card-body">
+                <h3 className="treatment-card-title">{item.title}</h3>
+                <p className="treatment-card-desc">{item.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

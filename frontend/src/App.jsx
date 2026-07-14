@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
@@ -7,9 +7,16 @@ import Testimonials from './components/Testimonials/Testimonials';
 import Tips from './components/Tips/Tips';
 import AppointmentForm from './components/AppointmentForm/AppointmentForm';
 import ContactUs from './components/ContactUs/ContactUs';
+import Gallery from './components/Gallery/Gallery';
 import Footer from './components/Footer/Footer';
 
 export default function App() {
+  const [heroAnimKey, setHeroAnimKey] = useState(0);
+
+  const triggerHeroAnim = () => {
+    setHeroAnimKey((prev) => prev + 1);
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,13 +42,14 @@ export default function App() {
 
   return (
     <div className="app-root">
-      <Navbar />
+      <Navbar onHomeClick={triggerHeroAnim} />
       <main>
-        <Hero />
+        <Hero key={heroAnimKey} />
         <About />
         <Dentists />
         <Testimonials />
         <Tips />
+        <Gallery />
         <AppointmentForm />
         <ContactUs />
       </main>

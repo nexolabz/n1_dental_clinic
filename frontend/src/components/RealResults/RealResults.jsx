@@ -2,14 +2,49 @@ import React, { useState, useRef, useEffect } from 'react';
 import './RealResults.css';
 
 export default function RealResults() {
-  const [sliderPos, setSliderPos] = useState(50);
+  const [sliderPos, setSliderPos] = useState(20); // Start at left (Before)
   const [isDragging, setIsDragging] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(true); // Enable initial animation
   const [bounceLimit, setBounceLimit] = useState(null); // 'left' | 'right' | null
 
   const containerRef = useRef(null);
+  const animTimeoutsRef = useRef([]);
+
+  // Auto-animate slider stick on mount (left -> right -> center)
+  useEffect(() => {
+    // Clear any existing timeouts
+    animTimeoutsRef.current.forEach(clearTimeout);
+    animTimeoutsRef.current = [];
+
+    // Step 1: Slide from 20% to 80% (right/After) after 400ms
+    const t1 = setTimeout(() => {
+      setSliderPos(80);
+    }, 400);
+
+    // Step 2: Slide from 80% back to 50% (center) after 2200ms (1.5s transition + 300ms pause)
+    const t2 = setTimeout(() => {
+      setSliderPos(50);
+    }, 2200);
+
+    // Step 3: End animation state after 4000ms (1.5s transition + 300ms pause)
+    const t3 = setTimeout(() => {
+      setIsAnimating(false);
+    }, 4000);
+
+    animTimeoutsRef.current = [t1, t2, t3];
+
+    return () => {
+      animTimeoutsRef.current.forEach(clearTimeout);
+    };
+  }, []);
 
   const handlePointerDown = (e) => {
     e.preventDefault();
+    // Cancel auto-animation immediately if dragging starts
+    if (isAnimating) {
+      animTimeoutsRef.current.forEach(clearTimeout);
+      setIsAnimating(false);
+    }
     setIsDragging(true);
     updateSliderPosition(e.clientX || (e.touches && e.touches[0].clientX));
   };
@@ -89,7 +124,7 @@ export default function RealResults() {
       {/* Slider Frame */}
       <div 
         ref={containerRef}
-        className={`slider-frame ${bounceLimit ? `bounce-${bounceLimit}` : ''}`}
+        className={`slider-frame ${bounceLimit ? `bounce-${bounceLimit}` : ''} ${isAnimating ? 'is-animating' : ''}`}
         onMouseDown={handlePointerDown}
         onTouchStart={handlePointerDown}
       >

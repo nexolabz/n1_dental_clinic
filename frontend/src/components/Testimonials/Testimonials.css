@@ -102,7 +102,7 @@
     rgba(30, 144, 255, 0.85) 75%,
     rgba(0, 0, 139, 0.9) 100%
   );
-  opacity: 1;
+  opacity: 0; /* Opened by default to reveal the patient photo */
   transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 4;
 }
@@ -241,21 +241,16 @@
 }
 
 /* Hover effects */
-.testimonial-card:hover .dental-mirror-tool {
-  /* Swing the handle slightly on hover, indicating active inspection */
-  transform: translate(-50%, -12.5%) rotate(15deg);
-}
-
-.testimonial-card:hover .mirror-reflection-overlay {
-  opacity: 0; /* Reveal the patient photo */
-}
-
 .testimonial-card:hover .testimonial-photo-frame {
   transform: scale(1.05);
 }
 
 /* Responsive viewports */
 @media (max-width: 768px) {
+  .testimonials-section {
+    padding: 60px 24px 50px;
+  }
+
   .testimonial-card {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -301,9 +296,5 @@
   .dental-mirror-tool {
     width: 134px;
     transform: translate(-50%, -12.5%) rotate(60deg); /* Rotate more horizontally to push handle away from text */
-  }
-
-  .testimonial-card:hover .dental-mirror-tool {
-    transform: translate(-50%, -30%) rotate(75deg); /* Slide mirror tool upwards and tilt further on hover/tap */
   }
 }

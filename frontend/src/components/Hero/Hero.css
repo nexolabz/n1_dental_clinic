@@ -3,7 +3,6 @@
   background-color: var(--bg-soft);
   position: relative;
   overflow: hidden;
-  animation: heroEntrance 1.2s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 
 @media (min-width: 992px) {
@@ -15,14 +14,36 @@
   }
 }
 
-@keyframes heroEntrance {
+@keyframes heroFadeUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -70,6 +91,7 @@
   font-size: 1.05rem;
   letter-spacing: 0.5px;
   margin-bottom: 18px;
+  animation: heroFadeDown 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.1s both;
 }
 
 .hero-tagline-icon {
@@ -91,6 +113,7 @@
   color: var(--text-main);
   margin-bottom: 20px;
   letter-spacing: -0.5px;
+  animation: heroFadeUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s both;
 }
 
 @media (max-width: 1200px) {
@@ -112,6 +135,7 @@
   color: var(--text-muted);
   max-width: 540px;
   margin-bottom: 36px;
+  animation: heroFadeUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
 }
 
 @media (max-width: 992px) {
@@ -127,6 +151,7 @@
   gap: 16px;
   margin-bottom: 48px;
   width: 100%;
+  animation: heroFadeUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.4s both;
 }
 
 @media (max-width: 992px) {
@@ -203,6 +228,7 @@
   align-items: center;
   gap: 32px;
   flex-wrap: wrap;
+  animation: heroFadeUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.5s both;
 }
 
 @media (max-width: 992px) {
@@ -244,6 +270,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  animation: heroScaleIn 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
 }
 
 .image-wrapper {

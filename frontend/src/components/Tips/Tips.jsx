@@ -101,95 +101,65 @@ export default function Tips() {
     <section id="tips" className="tips-section section">
       <div className="tips-container container">
         <div className="section-header">
-          <h2 className="section-title">Healthy Teeth Tips</h2>
+          <h2 className="section-title">Tips</h2>
         </div>
 
         {/* Bathroom vanity scene container */}
         <div className="bathroom-scene">
-          {/* Wall Background Image */}
-          <div className="bathroom-wall">
-            {/* Transparent Grey Glass Doors */}
-            <div className="bathroom-door left-door">
-              <div className="bathroom-lamp">
-                <div className="lamp-mount"></div>
-                <div className="lamp-arm"></div>
-                <div className="lamp-base-cup"></div>
-                <div className="lamp-shade"></div>
-              </div>
-            </div>
-            <div className="bathroom-door right-door">
-              <div className="bathroom-lamp">
-                <div className="lamp-mount"></div>
-                <div className="lamp-arm"></div>
-                <div className="lamp-base-cup"></div>
-                <div className="lamp-shade"></div>
-              </div>
-            </div>
-            
-            {/* Brush Stand sitting on the vanity countertop */}
-            <img 
-              src={`${import.meta.env.BASE_URL || '/'}brushstand.png`} 
-              alt="Brush Stand" 
-              className="vanity-brushstand"
-              draggable="false"
-            />
-            
-            {/* Rectangular Mirror with Slideshow */}
-            <div className="bathroom-mirror">
-              <div className="mirror-glass">
-                {/* Active Slide */}
-                <div className="mirror-slideshow-track">
-                  <div className="mirror-slide" key={currentSlide}>
-                    <div className="slide-image-box">
-                      <img 
-                        src={`${import.meta.env.BASE_URL || '/'}tips/${tipsList[currentSlide].image}`} 
-                        alt={tipsList[currentSlide].title} 
-                        className="slide-img"
-                        draggable="false"
-                      />
-                    </div>
-                    <div className="slide-content">
-                      <span className="slide-tip-number">Tip 0{tipsList[currentSlide].id}</span>
-                      <h3 className="slide-title">{tipsList[currentSlide].title}</h3>
-                      <p className="slide-desc">{tipsList[currentSlide].description}</p>
-                    </div>
+          {/* Rectangular Mirror with Slideshow */}
+          <div className="bathroom-mirror">
+            <div className="mirror-glass">
+              {/* Active Slide */}
+              <div className="mirror-slideshow-track">
+                <div className="mirror-slide" key={currentSlide}>
+                  <div className="slide-image-box">
+                    <img 
+                      src={`${import.meta.env.BASE_URL || '/'}tips/${tipsList[currentSlide].image}`} 
+                      alt={tipsList[currentSlide].title} 
+                      className="slide-img"
+                      draggable="false"
+                    />
+                  </div>
+                  <div className="slide-content">
+                    <span className="slide-tip-number">Tip 0{tipsList[currentSlide].id}</span>
+                    <h3 className="slide-title">{tipsList[currentSlide].title}</h3>
+                    <p className="slide-desc">{tipsList[currentSlide].description}</p>
                   </div>
                 </div>
+              </div>
 
-                {/* Slideshow Control Buttons */}
-                <button 
-                  className="mirror-control-btn prev" 
-                  onClick={prevSlide}
-                  aria-label="Previous Tip"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
-                </button>
-                <button 
-                  className="mirror-control-btn next" 
-                  onClick={nextSlide}
-                  aria-label="Next Tip"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </button>
+              {/* Slideshow Control Buttons */}
+              <button 
+                className="mirror-control-btn prev" 
+                onClick={prevSlide}
+                aria-label="Previous Tip"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button 
+                className="mirror-control-btn next" 
+                onClick={nextSlide}
+                aria-label="Next Tip"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
 
-                {/* Slideshow Indicators (Dots) */}
-                <div className="mirror-indicators">
-                  {tipsList.map((_, idx) => (
-                    <button
-                      key={idx}
-                      className={`mirror-indicator-dot ${idx === currentSlide ? 'active' : ''}`}
-                      onClick={(e) => handleDotClick(idx, e)}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
-                </div>
+              {/* Slideshow Indicators (Dots) */}
+              <div className="mirror-indicators">
+                {tipsList.map((_, idx) => (
+                  <button
+                    key={idx}
+                    className={`mirror-indicator-dot ${idx === currentSlide ? 'active' : ''}`}
+                    onClick={(e) => handleDotClick(idx, e)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
               </div>
             </div>
-
           </div>
         </div>
 

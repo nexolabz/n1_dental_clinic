@@ -110,6 +110,15 @@
   cursor: col-resize;
 }
 
+/* Transition animations during initial auto-animate demo */
+.slider-frame.is-animating .slider-handle-line {
+  transition: left 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slider-frame.is-animating .before-layer {
+  transition: clip-path 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Bounce Visual Feedback Animations */
 .slider-frame.bounce-left {
   animation: bounceLeftEffect 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;

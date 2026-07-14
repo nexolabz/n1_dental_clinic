@@ -1,7 +1,16 @@
 .tips-section {
-  background-color: var(--bg-soft);
+  background-color: #a6bdd4; /* Fallback */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url('/bathroom_bg.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   border-top: 1px solid var(--border-color);
-  padding: 80px 24px;
+  padding: 100px 24px;
+}
+
+:root.dark-theme .tips-section {
+  background-color: #1c2732; /* Fallback */
+  background-image: linear-gradient(rgba(11, 21, 23, 0.6), rgba(11, 21, 23, 0.6)), url('/bathroom_bg.png');
 }
 
 .tips-container {
@@ -11,248 +20,26 @@
   width: 100%;
 }
 
+.tips-section .section-header {
+  margin-bottom: 160px; /* Prevent overlap with the elevated mirror */
+}
+
 /* Bathroom Vanity Scene Container */
 .bathroom-scene {
   width: 100%;
   max-width: 900px;
   margin: 40px auto 0;
   padding: 0 10px;
-}
-
-/* Wall Background - Image of Bathroom */
-.bathroom-wall {
-  width: 100%;
-  aspect-ratio: 1.8; /* Maintains 612x340 proportions of the background image */
-  background-image: url('/basin.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
   position: relative;
-  border-radius: var(--radius-lg);
-  overflow: visible; /* Let mirror frame hover nicely */
+  aspect-ratio: 1.8; /* Sized to perfectly scale the mirror position on the wall */
 }
 
-/* Transparent Grey Shaded Glass Doors on left and right */
-.bathroom-door {
-  position: absolute;
-  top: -8%; /* Align with the top side of the mirror */
-  bottom: 0; /* Extend to the bottom of the wall container */
-  width: 22%; /* Sized to sit nicely at the sides of the vanity */
-  background-color: rgba(148, 163, 184, 0.12); /* Soft transparent grey shade */
-  backdrop-filter: blur(1.5px); /* Frosted glass effect */
-  -webkit-backdrop-filter: blur(1.5px);
-  border: 2px solid rgba(71, 85, 105, 0.35); /* Metal door frame */
-  z-index: 4; /* Above wall background, below mirror */
-  box-sizing: border-box;
-}
-
-.left-door {
-  left: 0;
-  border-left: none; /* Merge with container border */
-}
-
-.right-door {
-  right: 0;
-  border-right: none; /* Merge with container border */
-}
-
-/* Glass glare reflection */
-.bathroom-door::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-/* Chrome door handle */
-.bathroom-door::after {
-  content: '';
-  position: absolute;
-  top: 45%;
-  width: 5px;
-  height: 48px;
-  background-color: #475569; /* Slate handle */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-full);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.left-door::after {
-  right: 10px;
-}
-
-.right-door::after {
-  left: 10px;
-}
-
-:root.dark-theme .bathroom-door {
-  background-color: rgba(30, 41, 59, 0.3); /* Dark glass shade */
-  border-color: rgba(148, 163, 184, 0.2);
-}
-
-:root.dark-theme .bathroom-door::after {
-  background-color: #94a3b8;
-}
-
-/* Brush Stand on Vanity Countertop */
-.vanity-brushstand {
-  position: absolute;
-  bottom: 31%; /* Rest exactly on the countertop line */
-  right: 27%; /* Sits between basin and folded towels */
-  width: 9%; /* Sized to match basin scale */
-  aspect-ratio: 1;
-  z-index: 4; /* Behind doors, on top of vanity countertop */
-  pointer-events: none;
-}
-
-/* Glowing Bathroom Sconce Lamp on Glass Doors (Front View) */
-.bathroom-lamp {
-  position: absolute;
-  top: 10%; /* Near the top side of the mirror */
-  width: 44px;
-  height: 68px;
-  z-index: 10;
-}
-
-.left-door .bathroom-lamp {
-  right: 15%; /* Positioned towards the inner mirror side of the left door */
-}
-
-.right-door .bathroom-lamp {
-  left: 15%; /* Positioned towards the inner mirror side of the right door */
-}
-
-/* Mounting Bracket plate (directly behind, centered) */
-.lamp-mount {
-  position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14px;
-  height: 32px;
-  background-color: #1e293b; /* Dark charcoal metal */
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  z-index: 1;
-}
-
-/* Supporting bracket arm (centered) */
-.lamp-arm {
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 36px;
-  background-color: #1e293b;
-  border-radius: 1px;
-  z-index: 2;
-}
-
-.lamp-arm::after {
-  /* horizontal support plate under cup */
-  content: '';
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 18px;
-  height: 4px;
-  background-color: #1e293b;
-}
-
-/* Base holder cup (centered) */
-.lamp-base-cup {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 6px;
-  background-color: #0f172a;
-  border-radius: 0 0 2px 2px;
-  z-index: 3;
-}
-
-/* Glowing glass cylinder shade (centered) */
-.lamp-shade {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 24px;
-  height: 40px;
-  background: linear-gradient(to bottom, #ffffff 0%, #fde047 100%);
-  border-radius: 3px;
-  box-shadow: 
-    0 0 16px rgba(253, 224, 71, 0.85), 
-    0 0 30px rgba(234, 179, 8, 0.5), 
-    inset 0 0 6px rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(254, 240, 138, 0.35);
-  animation: warmGlow 3.5s ease-in-out infinite alternate;
-  z-index: 4;
-}
-
-@keyframes warmGlow {
-  0% {
-    box-shadow: 
-      0 0 12px rgba(253, 224, 71, 0.75), 
-      0 0 25px rgba(234, 179, 8, 0.4), 
-      inset 0 0 6px rgba(255, 255, 255, 0.8);
-    filter: brightness(0.98);
-  }
-  100% {
-    box-shadow: 
-      0 0 20px rgba(253, 224, 71, 0.95), 
-      0 0 45px rgba(234, 179, 8, 0.65), 
-      inset 0 0 8px rgba(255, 255, 255, 0.9);
-    filter: brightness(1.06);
-  }
-}
-
-/* Dark Mode visibility overrides for Sconce Lamp Stand */
-:root.dark-theme .lamp-mount {
-  background-color: #64748b; /* Lighter metallic grey */
-  box-shadow: 0 0 8px rgba(253, 224, 71, 0.2), 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-:root.dark-theme .lamp-arm {
-  background-color: #64748b;
-}
-
-:root.dark-theme .lamp-arm::after {
-  background-color: #64748b;
-}
-
-:root.dark-theme .lamp-base-cup {
-  background-color: #334155;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* In dark theme, we add a soft dark overlay to make it look like a dimmed bathroom at night */
-:root.dark-theme .bathroom-wall::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(11, 21, 23, 0.4); /* Dimming overlay */
-  border-radius: calc(var(--radius-lg) - 2px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Rectangular Mirror Frame (Positioned higher, horizontal rectangle) */
+/* Rectangular Mirror with Slideshow */
 .bathroom-mirror {
-  width: 52%; /* Wider horizontal rectangle */
-  height: 48%; /* Balanced height */
+  width: 68%;
+  height: 76%;
   position: absolute;
-  top: -8%; /* Positioned further up, away from basin */
+  top: -34%; /* Sits exactly on the blank wall space above the sink faucet in bathroom_bg.png */
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--bg-card);
@@ -438,58 +225,54 @@
 
 /* Responsive Viewports */
 @media (max-width: 768px) {
-  .bathroom-scene {
-    margin-top: 10px;
-    padding-top: 20px; /* Reset padding since mirror fits inside aspect ratio */
+  .tips-section {
+    background-image: none !important;
+    background-color: var(--bg-soft);
+    padding: 60px 24px;
   }
 
-  .bathroom-wall {
-    aspect-ratio: 1.15; /* Constant aspect ratio for perfect responsive scaling */
-    height: auto;
-    background-image: url('/basin.png');
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    overflow: visible;
+  :root.dark-theme .tips-section {
+    background-image: none !important;
+    background-color: var(--bg-soft);
   }
-  
-  :root.dark-theme .bathroom-wall::after {
-    display: block; /* Dimming overlay on mobile */
+
+  .tips-section .section-header {
+    margin-bottom: 40px;
+  }
+
+  .bathroom-scene {
+    aspect-ratio: 1.15;
+    background-image: url('/basin.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 20px auto 0;
+  }
+
+  :root.dark-theme .bathroom-scene::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(11, 21, 23, 0.4);
+    background-color: rgba(11, 21, 23, 0.45);
     pointer-events: none;
     z-index: 1;
     border-radius: var(--radius-lg);
   }
 
-  .bathroom-door {
-    display: none; /* Hide glass doors on mobile */
-  }
-
-  .vanity-brushstand {
-    display: block;
-    bottom: 20.4%; /* Align precisely with countertop line */
-    right: 27%;
-    width: 9%;
-    z-index: 4;
-  }
-
   .bathroom-mirror {
     position: absolute;
-    top: 2%; /* Positioned on the top wall space */
+    top: -10%; /* Move higher up to reveal the basin below */
     left: 50%;
     transform: translateX(-50%);
     width: 86%;
     max-width: 360px;
-    height: 66%; /* Fits the top half perfectly */
+    height: 60%; /* Fits the top half perfectly */
     z-index: 5;
   }
 

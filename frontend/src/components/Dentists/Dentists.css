@@ -23,9 +23,27 @@
 
 @media (max-width: 768px) {
   .dentists-grid {
-    grid-template-columns: 1fr;
-    max-width: 420px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    padding: 15px 24px 24px;
+    margin: 0 -24px;
+    scrollbar-width: none;
+  }
+
+  .dentists-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .doctor-apron-card {
+    flex: 0 0 290px;
+    width: 290px;
+    scroll-snap-align: center;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
   }
 }
 

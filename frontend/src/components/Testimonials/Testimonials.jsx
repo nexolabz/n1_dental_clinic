@@ -27,6 +27,32 @@ export default function Testimonials() {
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const minSwipeDistance = 50;
+
+  const handleTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      setActiveIndex((prev) => (prev + 1) % patientReviews.length);
+    } else if (isRightSwipe) {
+      setActiveIndex((prev) => (prev - 1 + patientReviews.length) % patientReviews.length);
+    }
+  };
 
   // Auto-scroll every 5 seconds
   useEffect(() => {
@@ -44,7 +70,12 @@ export default function Testimonials() {
         </div>
 
         {/* Carousel Slider */}
-        <div className="testimonials-carousel-wrapper">
+        <div 
+          className="testimonials-carousel-wrapper"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div 
             className="testimonials-carousel-track"
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
